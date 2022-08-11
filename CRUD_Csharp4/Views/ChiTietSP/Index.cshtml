@@ -1,0 +1,115 @@
+﻿@model IEnumerable<CodeFirst_13Bang.Models.ChiTietSP>
+
+@{
+    ViewData["Title"] = "Index";
+    List<CodeFirst_13Bang.Models.SanPham> sanPham = ViewData["sanpham"] as List<CodeFirst_13Bang.Models.SanPham>;
+    List<CodeFirst_13Bang.Models.MauSac> mauSacs = ViewData["mausac"] as List<CodeFirst_13Bang.Models.MauSac>;
+    List<CodeFirst_13Bang.Models.DongSP> dongSPs = ViewData["dongsp"] as List<CodeFirst_13Bang.Models.DongSP>;
+    List<CodeFirst_13Bang.Models.NSX> nSXes = ViewData["nsx"] as List<CodeFirst_13Bang.Models.NSX>;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.NamBH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoLuongTon)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaNhap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaBan)
+            </th>
+            <th>
+                Sản phẩm
+            </th>
+            <th>
+               Nhà sản xuất
+            </th>
+            <th>
+                Màu sắc
+            </th>
+            <th>
+                Dòng sản phẩm
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.NamBH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MoTa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuongTon)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaNhap)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaBan)
+                </td>
+                @foreach (var x in sanPham)
+                {
+                    if (item.IdSP == x.Id)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => x.Ten)
+                        </td>
+                    }
+                }
+                @foreach (var x in nSXes)
+                {
+                    if (item.IdNsx == x.Id)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => x.Ten)
+                        </td>
+                    }
+                }
+                @foreach (var x in mauSacs)
+                {
+                    if (item.IdMauSac == x.Id)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => x.Ten)
+                        </td>
+                    }
+                }
+                @foreach (var x in dongSPs)
+                {
+                    if (item.IdDongSP == x.Id)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => x.Ten)
+                        </td>
+                    }
+                }
+
+                <td>
+                    @Html.ActionLink("Thêm", "Update", new { item.Id })
+                    <button type="submit" asp-action="Update" asp-route-id="@item.Id">thử xem</button>
+                    <input type="submit" class=" btn btn-primary" asp-action="Update" asp-controller="ChiTietSP" value="alo" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

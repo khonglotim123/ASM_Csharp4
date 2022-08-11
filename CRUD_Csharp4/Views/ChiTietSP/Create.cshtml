@@ -1,0 +1,101 @@
+﻿@model CodeFirst_13Bang.Models.ChiTietSP
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Create";
+    List<CodeFirst_13Bang.Models.SanPham> sanPham = ViewData["sanpham"] as List<CodeFirst_13Bang.Models.SanPham>;
+    List<CodeFirst_13Bang.Models.MauSac> mauSacs = ViewData["mausac"] as List<CodeFirst_13Bang.Models.MauSac>;
+    List<CodeFirst_13Bang.Models.DongSP> dongSPs = ViewData["dongsp"] as List<CodeFirst_13Bang.Models.DongSP>;
+    List<CodeFirst_13Bang.Models.NSX> nSXes = ViewData["nsx"] as List<CodeFirst_13Bang.Models.NSX>;
+}
+
+<h1>Create</h1>
+
+<h4></h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NamBH" class="control-label"></label>
+                <input asp-for="NamBH" class="form-control" />
+                <span asp-validation-for="NamBH" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoTa" class="control-label"></label>
+                <input asp-for="MoTa" class="form-control" />
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoLuongTon" class="control-label"></label>
+                <input asp-for="SoLuongTon" class="form-control" />
+                <span asp-validation-for="SoLuongTon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaNhap" class="control-label"></label>
+                <input asp-for="GiaNhap" class="form-control" />
+                <span asp-validation-for="GiaNhap" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaBan" class="control-label"></label>
+                <input asp-for="GiaBan" class="form-control" />
+                <span asp-validation-for="GiaBan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdSP" class="control-label"></label>
+                <select class="form-control" id="IdSP" name="IdSP">
+                    <option>Chọn sản phẩm</option>
+                    @foreach (var x in sanPham)
+                    {
+                        <option value="@x.Id">@x.Ma</option>
+                    }
+                </select>
+                <span asp-validation-for="IdSP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdNsx" class="control-label"></label>
+                <select class="form-control" id="IdNsx" name="IdNsx">
+                    <option>Chọn nhà sản xuất</option>
+                    @foreach (var x in nSXes)
+                    {
+                        <option value="@x.Id">@x.Ma</option>
+                    }
+                </select>
+                <span asp-validation-for="IdNsx" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdMauSac" class="control-label"></label>
+                <select class="form-control" id="IdMauSac" name="IdMauSac">
+                    <option>Chọn màu sắc</option>
+                    @foreach (var x in mauSacs)
+                    {
+                        <option value="@x.Id">@x.Ma</option>
+                    }
+                </select>
+                <span asp-validation-for="IdMauSac" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdDongSP" class="control-label"></label>
+                <select class="form-control" id="IdDongSP" name="IdDongSP">
+                    <option>Chọn dòng sản phẩm</option>
+                    @foreach (var x in dongSPs)
+                    {
+                        <option value="@x.Id">@x.Ma</option>
+                    }
+                </select>
+                <span asp-validation-for="IdDongSP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
