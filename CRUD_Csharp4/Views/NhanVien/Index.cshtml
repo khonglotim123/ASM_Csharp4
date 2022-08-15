@@ -1,0 +1,105 @@
+﻿@model IEnumerable<CodeFirst_13Bang.Models.NhanVien>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<CodeFirst_13Bang.Models.CuaHang> cuaHangs = ViewData["cuahang"] as List<CodeFirst_13Bang.Models.CuaHang>;
+    List<CodeFirst_13Bang.Models.ChucVu> chucVus = ViewData["chucvu"] as List<CodeFirst_13Bang.Models.ChucVu>;
+}
+
+<h1>Danh sách nhân viên</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Thêm mới</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>            
+            <th>
+               Mã
+            </th>
+            <th>
+              Tên
+            </th>           
+            <th>
+                Giới tính
+            </th>
+            <th>
+               Ngày sinh
+            </th>
+            <th>
+               Địa chỉ
+            </th>
+            <th>
+               Số điện thoại
+            </th>
+            <th>
+                Mật khẩu
+            </th>
+            <th>
+               Trạng thái
+            </th>
+            <th>
+               Cửa hàng
+            </th>
+            <th>
+               Chức vụ
+            </th>           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.Ma)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ho) @Html.DisplayFor(modelItem => item.TenDem) @Html.DisplayFor(modelItem => item.Ten)
+            </td>            
+            <td>
+               @Html.Raw(item.GioiTinh==1?"Nam":"Nữ")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgaySinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sdt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatKhau)
+            </td>
+            <td>
+                @Html.Raw(item.TrangThai==1?"Đang làm việc":"đang nghỉ làm")               
+            </td>
+            <td>
+                @foreach (var x in cuaHangs)
+                {
+                    if (x.Id == item.IdCH)
+                    {
+                        @Html.DisplayFor(modelItem => x.Ten)
+                    }
+                }
+            </td>
+            <td>
+                @foreach (var x in chucVus)
+                {
+                    if (x.Id == item.IdCV)
+                    {
+                        @Html.DisplayFor(modelItem => x.Ten)
+                    }
+                }                
+            </td>           
+            <td>
+                @Html.ActionLink("Sửa", "Update", new { item.Id }, new { @class = "btn btn-primary" }) |
+                @Html.ActionLink("Chi tiết", "Chitiet", new { item.Id }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Xóa", "Delete", new { item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,31 +1,41 @@
-﻿@model IEnumerable<CodeFirst_13Bang.Models.CuaHang>
+﻿@model IEnumerable<CodeFirst_13Bang.Models.KhachHang>
 
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Danh sách cửa hàng</h1>
+<h1>Danh sách khách hàng</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-success">Thêm mới</a>
 </p>
 <table class="table">
     <thead>
-        <tr>            
+        <tr>           
             <th>
                Mã
             </th>
             <th>
-                Tên
+               Tên
+            </th>            
+            <th>
+               Ngày sinh
             </th>
             <th>
-               Địa chỉ
+                Số điện thoại
+            </th>
+            <th>
+                Địa chỉ
             </th>
             <th>
                Thành phố
             </th>
             <th>
-                Quốc gia
+               Quốc gia
+            </th>
+            <th>
+                Mật khẩu
             </th>
             <th></th>
         </tr>
@@ -37,7 +47,13 @@
                 @Html.DisplayFor(modelItem => item.Ma)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ten)
+                @Html.DisplayFor(modelItem => item.Ho)  @Html.DisplayFor(modelItem => item.TenDem)  @Html.DisplayFor(modelItem => item.Ten)
+            </td>           
+            <td>
+                @Html.DisplayFor(modelItem => item.NgaySinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sdt)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DiaChi)
@@ -48,7 +64,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.QuocGia)
             </td>
-            
+            <td>
+                @Html.DisplayFor(modelItem => item.MatKhau)
+            </td>
             <td>
                 @Html.ActionLink("Sửa", "Update", new { item.Id }, new {@class="btn btn-primary" }) |
                 @Html.ActionLink("Chi tiết", "Chitiet", new { item.Id }, new { @class = "btn btn-warning" }) |

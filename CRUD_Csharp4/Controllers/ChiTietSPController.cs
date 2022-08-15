@@ -30,13 +30,12 @@ namespace CRUD_Csharp4.Controllers
             _ct = new QLHoaDonChiTietService();
         }
         [HttpGet]
-        public IActionResult Index(int id)
+        public IActionResult Index()
         {
             ViewData["sanpham"] = _sp.GetAll();
             ViewData["mausac"] = _mausac.GetAll();
             ViewData["nsx"] = _nsx.GetAll();
-            ViewData["dongsp"] = _dongsp.GetAll();
-            idhd = id;
+            ViewData["dongsp"] = _dongsp.GetAll();            
             return View(_ctsp.GetAll());           
         }
         [HttpGet]
@@ -90,6 +89,55 @@ namespace CRUD_Csharp4.Controllers
                 return RedirectToAction("Index", "HoaDonChiTiet");
             }
         }
-
+        [HttpGet]
+        public IActionResult Sua(int id)
+        {
+            ChiTietSP sv = _ctsp.GetAll().FirstOrDefault(c => c.Id == id);
+            ViewData["sanpham"] = _sp.GetAll();
+            ViewData["mausac"] = _mausac.GetAll();
+            ViewData["nsx"] = _nsx.GetAll();
+            ViewData["dongsp"] = _dongsp.GetAll();
+            return View(sv);
+        }
+        [HttpPost]
+        public IActionResult Sua(ChiTietSP chucVu)
+        {
+            if (chucVu != null)
+            {
+                _ctsp.Update(chucVu);
+                return RedirectToAction("Index", "ChiTietSP");
+            }
+            return RedirectToAction("Update", "ChiTietSP");
+        }
+        [HttpGet]
+        public IActionResult Chitiet(int id)
+        {
+            ChiTietSP sv = _ctsp.GetAll().FirstOrDefault(c => c.Id == id);
+            ViewData["sanpham"] = _sp.GetAll();
+            ViewData["mausac"] = _mausac.GetAll();
+            ViewData["nsx"] = _nsx.GetAll();
+            ViewData["dongsp"] = _dongsp.GetAll();
+            return View(sv);
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            ChiTietSP sv = _ctsp.GetAll().FirstOrDefault(c => c.Id == id);
+            ViewData["sanpham"] = _sp.GetAll();
+            ViewData["mausac"] = _mausac.GetAll();
+            ViewData["nsx"] = _nsx.GetAll();
+            ViewData["dongsp"] = _dongsp.GetAll();
+            return View(sv);
+        }
+        [HttpPost]
+        public IActionResult Delete(ChiTietSP chucVu)
+        {
+            if (chucVu != null)
+            {
+                _ctsp.Delete(chucVu.Id);
+                return RedirectToAction("Index", "ChiTietSP");
+            }
+            return RedirectToAction("Delete", "ChiTietSP");
+        }
     }
 }

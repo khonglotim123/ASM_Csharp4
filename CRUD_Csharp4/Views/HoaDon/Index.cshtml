@@ -88,7 +88,7 @@
                 @Html.DisplayFor(modelItem => item.IdNV)
             </td>
             <td>
-                @Html.ActionLink("Thêm sp", "index", "Chitietsp", new { item.Id }) |
+                @Html.ActionLink("Thêm sản phẩm", "ThemSP", "HoaDon", new { item.Id }, new {@class="btn btn-primary"}) |
                 @Html.ActionLink("Chi tiết", "Index", "HoaDonChiTiet", new { item.Id }) |
                 @Html.ActionLink("Thanh toán", "Delete", new { item.Id })
             </td>

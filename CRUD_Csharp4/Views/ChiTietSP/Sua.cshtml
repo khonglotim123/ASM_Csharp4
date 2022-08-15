@@ -1,30 +1,31 @@
 ﻿@model CodeFirst_13Bang.Models.ChiTietSP
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Sua";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     List<CodeFirst_13Bang.Models.SanPham> sanPham = ViewData["sanpham"] as List<CodeFirst_13Bang.Models.SanPham>;
     List<CodeFirst_13Bang.Models.MauSac> mauSacs = ViewData["mausac"] as List<CodeFirst_13Bang.Models.MauSac>;
     List<CodeFirst_13Bang.Models.DongSP> dongSPs = ViewData["dongsp"] as List<CodeFirst_13Bang.Models.DongSP>;
     List<CodeFirst_13Bang.Models.NSX> nSXes = ViewData["nsx"] as List<CodeFirst_13Bang.Models.NSX>;
 }
 
-<h1>Thêm mới</h1>
 
-<h4></h4>
+
+<h1>Sửa</h1>
+
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Sua">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="NamBH" class="control-label">Năm bảo hành</label>
+                <label asp-for="NamBH" class="control-label"> Năm bảo hành</label>
                 <input asp-for="NamBH" class="form-control" />
                 <span asp-validation-for="NamBH" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="MoTa" class="control-label"> Mô tả</label>
+                <label asp-for="MoTa" class="control-label">Mô tả</label>
                 <input asp-for="MoTa" class="form-control" />
                 <span asp-validation-for="MoTa" class="text-danger"></span>
             </div>
@@ -34,7 +35,7 @@
                 <span asp-validation-for="SoLuongTon" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GiaNhap" class="control-label"> Giá nhập</label>
+                <label asp-for="GiaNhap" class="control-label">Giá nhập</label>
                 <input asp-for="GiaNhap" class="form-control" />
                 <span asp-validation-for="GiaNhap" class="text-danger"></span>
             </div>
@@ -45,50 +46,62 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdSP" class="control-label"> Sản phẩm</label>
-                <select class="form-control" id="IdSP" name="IdSP">
-                    <option>Chọn sản phẩm</option>
+                <select class="form-control" id="IdSP" name="IdSP" asp-for="IdSP">                    
                     @foreach (var x in sanPham)
                     {
+                        if (x.Id == Model.IdSP)
+                        {
+                            <option value="@x.Id">@x.Ma</option>                            
+                        }
                         <option value="@x.Id">@x.Ma</option>
                     }
                 </select>
                 <span asp-validation-for="IdSP" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdNsx" class="control-label"> Nhà sản xuất</label>
-                <select class="form-control" id="IdNsx" name="IdNsx">
-                    <option>Chọn nhà sản xuất</option>
+                <label asp-for="IdNsx" class="control-label">Nhà sản xuất</label>
+                <select class="form-control" id="IdNsx" name="IdNsx" asp-for="IdNsx">
                     @foreach (var x in nSXes)
                     {
+                        if (x.Id == Model.IdNsx)
+                        {
+                            <option value="@x.Id">@x.Ma</option>
+                        }
                         <option value="@x.Id">@x.Ma</option>
                     }
                 </select>
                 <span asp-validation-for="IdNsx" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdMauSac" class="control-label"> Màu sắc</label>
-                <select class="form-control" id="IdMauSac" name="IdMauSac">
-                    <option>Chọn màu sắc</option>
+                <label asp-for="IdMauSac" class="control-label">Màu sắc</label>
+                <select class="form-control" id="IdMauSac" name="IdMauSac" asp-for="IdMauSac">                   
                     @foreach (var x in mauSacs)
                     {
+                        if (x.Id == Model.IdMauSac)
+                        {
+                            <option value="@x.Id">@x.Ma</option>
+                        }
                         <option value="@x.Id">@x.Ma</option>
                     }
                 </select>
                 <span asp-validation-for="IdMauSac" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IdDongSP" class="control-label"> Dòng sản phẩm</label>
-                <select class="form-control" id="IdDongSP" name="IdDongSP">
-                    <option>Chọn dòng sản phẩm</option>
+                <label asp-for="IdDongSP" class="control-label">Dòng sản phẩm</label>
+                <select class="form-control" id="IdDongSP" name="IdDongSP" asp-for="IdDongSP">
                     @foreach (var x in dongSPs)
                     {
+                        if (x.Id == Model.IdDongSP)
+                        {
+                            <option value="@x.Id">@x.Ma</option>
+                        }
                         <option value="@x.Id">@x.Ma</option>
                     }
                 </select>
                 <span asp-validation-for="IdDongSP" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Thêm mới" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -97,5 +110,4 @@
 <div>
     <a asp-action="Index" class="btn btn-warning">Quay lại danh sách</a>
 </div>
-
 

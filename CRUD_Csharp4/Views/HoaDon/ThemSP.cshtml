@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<CodeFirst_13Bang.Models.ChiTietSP>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ThemSP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     List<CodeFirst_13Bang.Models.SanPham> sanPham = ViewData["sanpham"] as List<CodeFirst_13Bang.Models.SanPham>;
     List<CodeFirst_13Bang.Models.MauSac> mauSacs = ViewData["mausac"] as List<CodeFirst_13Bang.Models.MauSac>;
     List<CodeFirst_13Bang.Models.DongSP> dongSPs = ViewData["dongsp"] as List<CodeFirst_13Bang.Models.DongSP>;
     List<CodeFirst_13Bang.Models.NSX> nSXes = ViewData["nsx"] as List<CodeFirst_13Bang.Models.NSX>;
 }
 
-<h1>Danh sách sản phẩm chi tiết</h1>
+<h1>ThemSP</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-success">Thêm mới</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -103,11 +104,10 @@
                         </td>
                     }
                 }
-            <td>
-                @Html.ActionLink("Sửa", "Sua", new { item.Id }, new { @class = "btn btn-primary" }) |
-                @Html.ActionLink("Chi tiết", "Chitiet", new { item.Id }, new { @class = "btn btn-warning" }) |
-                @Html.ActionLink("Xóa", "Delete", new { item.Id }, new { @class = "btn btn-danger" }) 
-            </td>
+
+                <td>
+                    @Html.ActionLink("Thêm", "Update", new { item.Id }, new { @class = "btn btn-primary" })
+                </td>
             </tr>
         }
     </tbody>
