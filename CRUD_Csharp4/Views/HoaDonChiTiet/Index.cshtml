@@ -3,27 +3,24 @@
 
 @{
     ViewData["Title"] = "Index";
+    List<CodeFirst_13Bang.Models.ChiTietSP> chiTietSPs = ViewData["chitietsp"] as List<CodeFirst_13Bang.Models.ChiTietSP>;
+    List<CodeFirst_13Bang.Models.SanPham> sanPhams = ViewData["sanpham"] as List<CodeFirst_13Bang.Models.SanPham>;
 }
 
-<h1>Index</h1>
+<h1>Danh sách sản phẩm trong hóa đơn</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdHoaDon)
+                Sản phẩm
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdChiTietSP)
+                Số lượng
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SoLuong)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DonGia)
+                Đơn giá
             </th>
             <th></th>
         </tr>
@@ -33,10 +30,20 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdHoaDon)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdChiTietSP)
+                    @foreach (var x in chiTietSPs)
+                    {
+                        if (x.Id == item.IdChiTietSP)
+                        {
+                            foreach (var y in sanPhams)
+                            {
+                                if (x.IdSP == y.Id)
+                                {
+                                    @Html.DisplayFor(modelItem => y.Ten)
+                                }
+                            }
+                        }
+                    }
+
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SoLuong)
@@ -44,12 +51,14 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.DonGia)
                 </td>
-                <td>
-                    @Html.ActionLink("Sửa", "Edit", new { item.IdChiTietSP,item.IdHoaDon }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
             </tr>
         }
+
     </tbody>
 </table>
+<h3 class="d-flex justify-content-end">Tổng tiền: @ViewData["tongtien"]</h3>
+
+<div class="row">
+    <a asp-action="Index" asp-controller="HoaDon" class="btn btn-success">Quay lại danh sách hóa đơn</a>
+    <a asp-action="ThanhToan" asp-controller="HoaDon" class="btn btn-danger">Thanh toán</a>
+</div>

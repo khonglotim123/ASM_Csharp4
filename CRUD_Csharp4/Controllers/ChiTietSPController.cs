@@ -17,8 +17,7 @@ namespace CRUD_Csharp4.Controllers
         private IQLDongSPService _dongsp;
         private IQLNSXService _nsx;
         private IQLHoaDonChiTiet _ct;
-        private int idsp;
-        public static int idhd;
+        
 
         public ChiTietSPController()
         {
@@ -61,34 +60,11 @@ namespace CRUD_Csharp4.Controllers
         [HttpGet]
         public IActionResult Update(int id)
         {
-            idsp = id;
+            
             ViewData["chitietsp"] = _ctsp.GetAll().FirstOrDefault(c=>c.Id==id);
-            ViewData["idhd"] = idhd;           
+                      
             return View();
-        }
-        [HttpPost]
-        public IActionResult Update()
-        {
-            HoaDonChiTiet hoaDonChiTiet = new HoaDonChiTiet();
-             hoaDonChiTiet = _ct.GetAll().FirstOrDefault(c => c.IdChiTietSP == idsp && c.IdHoaDon == idhd);            
-            if (hoaDonChiTiet != null)
-            {
-                hoaDonChiTiet.SoLuong++;
-                hoaDonChiTiet.DonGia += _ctsp.GetAll().FirstOrDefault(c=>c.Id==idsp).GiaBan;
-                _ct.Update(hoaDonChiTiet);
-                return RedirectToAction("Index", "HoaDonChiTiet");
-            }
-            else
-            {
-                HoaDonChiTiet ht = new HoaDonChiTiet();
-                ht.IdChiTietSP = idsp;
-                ht.IdHoaDon = idhd;
-                ht.DonGia = _ctsp.GetAll().FirstOrDefault(c => c.Id == idsp).GiaBan;
-                ht.SoLuong++;                
-                _ct.Create(ht);
-                return RedirectToAction("Index", "HoaDonChiTiet");
-            }
-        }
+        }        
         [HttpGet]
         public IActionResult Sua(int id)
         {

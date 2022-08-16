@@ -9,11 +9,9 @@
     List<CodeFirst_13Bang.Models.NSX> nSXes = ViewData["nsx"] as List<CodeFirst_13Bang.Models.NSX>;
 }
 
-<h1>ThemSP</h1>
+<h1>Thêm sản phẩm vào hóa đơn</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
@@ -106,7 +104,7 @@
                 }
 
                 <td>
-                    @Html.ActionLink("Thêm", "Update", new { item.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Thêm", "ThemSp","HoaDonChiTiet", new { item.Id }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }

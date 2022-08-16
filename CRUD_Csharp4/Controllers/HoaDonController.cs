@@ -19,6 +19,7 @@ namespace CRUD_Csharp4.Controllers
         private IQLDongSPService _dongsp;
         private IQLNSXService _nsx;
         private IQLHoaDonChiTiet _ct;
+        public static int idhd;
 
         public HoaDonController()
         {
@@ -53,13 +54,24 @@ namespace CRUD_Csharp4.Controllers
             }
             return RedirectToAction("Create","HoaDon");
         }
-        public IActionResult ThemSP()
+        [HttpGet]
+        public IActionResult ThemSP(int id)
         {
+            idhd = id;
             ViewData["sanpham"] = _sp.GetAll();
             ViewData["mausac"] = _mausac.GetAll();
             ViewData["nsx"] = _nsx.GetAll();
             ViewData["dongsp"] = _dongsp.GetAll();
             return View(_ctsp.GetAll());
+        }        
+        [HttpGet]
+        public IActionResult ThanhToan()
+        {
+            foreach (var x in _ct.GetAll().Where(c=>c.IdHoaDon==HoaDonController.idhd))
+            {
+                _ct.Delete(x);
+            }
+            return RedirectToAction("Index","HoaDon");
         }
     }
 }

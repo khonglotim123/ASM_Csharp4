@@ -23,10 +23,9 @@ namespace ASM_Csharp4.Repositories
             return true;
         }
 
-        public bool Delete(int id)
+        public bool Delete(HoaDonChiTiet hoaDonChiTiet)
         {
-            if (id == null) return false;
-            HoaDonChiTiet hoaDonChiTiet = _Context.hoaDonChiTiets.ToList().FirstOrDefault(c => c.IdChiTietSP == id);
+            if (hoaDonChiTiet == null) return false;           
             _Context.hoaDonChiTiets.Remove(hoaDonChiTiet);
             _Context.SaveChanges();
             return true;

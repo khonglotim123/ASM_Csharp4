@@ -22,9 +22,9 @@ namespace CRUD_Csharp4.Service
             return true;
         }
 
-        public bool Delete(int id)
+        public bool Delete(HoaDonChiTiet hoaDonChiTiet)
         {
-            _cv.Delete(id);
+            _cv.Delete(hoaDonChiTiet);
             return true;
         }
 

@@ -1,23 +1,23 @@
 ﻿@model IEnumerable<CodeFirst_13Bang.Models.NSX>
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Danh sách nhà sản xuất</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-success">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Thêm mới</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Ma)
+               Mã
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ten)
+               Tên
             </th>
             <th></th>
         </tr>
@@ -34,8 +34,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Sửa", "Update", new { item.Id }, new { @class = "btn btn-primary" }) |
-                    @Html.ActionLink("Chi tiết", "Chitiet", new { item.Id }) |
-                    @Html.ActionLink("Xóa", "Delete", new { item.Id })
+                    @Html.ActionLink("Chi tiết", "Chitiet", new { item.Id }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Xóa", "Delete", new { item.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }

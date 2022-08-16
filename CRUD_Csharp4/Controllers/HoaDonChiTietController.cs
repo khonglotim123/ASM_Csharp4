@@ -12,18 +12,31 @@ namespace CRUD_Csharp4.Controllers
     public class HoaDonChiTietController : Controller
     {
         private IQLHoaDonChiTiet _ct;
-        private IQLCTSanPhamService _sp;
-
+        private IQLCTSanPhamService _spct;
+        private IQLSanPhamService _sp;
+        private int idsp;
         public HoaDonChiTietController()
         {
-
             _ct = new QLHoaDonChiTietService();
-            _sp = new CTSanPhamService();
+            _spct = new CTSanPhamService();
+            _sp = new QLSanPhamService();
         }
         [HttpGet]
         public IActionResult Index(int id)
         {
-            return View(_ct.GetAll().Where(c => c.IdHoaDon == id || c.IdHoaDon == ChiTietSPController.idhd).ToList());
+            ViewData["chitietsp"] = _spct.GetAll();
+            ViewData["sanpham"] = _sp.GetAll();
+            int tong=0;
+            if (HoaDonController.idhd==0)
+            {
+                HoaDonController.idhd = id;
+            }
+            foreach (var x in _ct.GetAll().Where(c => c.IdHoaDon ==HoaDonController.idhd))
+            {
+                tong += x.DonGia;                
+            }
+            ViewData["tongtien"] = tong;
+            return View(_ct.GetAll().Where(c =>c.IdHoaDon == HoaDonController.idhd).ToList());
         }
         [HttpGet]
         public IActionResult Create()
@@ -33,7 +46,7 @@ namespace CRUD_Csharp4.Controllers
         [HttpPost]
         public IActionResult Create(HoaDonChiTiet hoaDonChiTiet)
         {
-            if (hoaDonChiTiet!=null)
+            if (hoaDonChiTiet != null)
             {
                 _ct.Create(hoaDonChiTiet);
                 return RedirectToAction("Index", "HoaDonChiTiet");
@@ -55,28 +68,36 @@ namespace CRUD_Csharp4.Controllers
                 return RedirectToAction("Index", "HoaDonChiTiet");
             }
             return RedirectToAction("Update", "HoaDonChiTiet");
-        }        
-        [HttpPost]
-        public IActionResult ThemSP(int a)
+        }
+
+        //public IActionResult ThemSP(int id)
+        //{
+        //    idsp = id;
+        //    return Ok();
+        //}
+        [HttpGet]
+        public IActionResult ThemSP(int id)
         {
-            HoaDonChiTiet hoaDonChiTiet = _ct.GetAll().FirstOrDefault(c => c.IdChiTietSP == a && c.IdHoaDon == ChiTietSPController.idhd);
-            if (hoaDonChiTiet!=null)
+            idsp = id;
+            HoaDonChiTiet hoaDonChiTiet = _ct.GetAll().FirstOrDefault(c => c.IdChiTietSP == idsp && c.IdHoaDon == HoaDonController.idhd);
+            if (hoaDonChiTiet != null)
             {
                 hoaDonChiTiet.SoLuong++;
-                hoaDonChiTiet.DonGia =hoaDonChiTiet.DonGia + Convert.ToInt32(_sp.GetAll().Where(c => c.Id == a).Select(c => c.GiaBan));
+                hoaDonChiTiet.DonGia += _spct.GetAll().FirstOrDefault(c => c.Id == idsp).GiaBan;
                 _ct.Update(hoaDonChiTiet);
                 return RedirectToAction("Index", "HoaDonChiTiet");
             }
             else
             {
-                hoaDonChiTiet.IdChiTietSP = a;
-                hoaDonChiTiet.IdHoaDon = ChiTietSPController.idhd;
-                hoaDonChiTiet.SoLuong++;
-                hoaDonChiTiet.DonGia = Convert.ToInt32(_sp.GetAll().Where(c => c.Id == a).Select(c => c.GiaBan));
-                _ct.Create(hoaDonChiTiet);
+                HoaDonChiTiet hoaDonChiTiet1 = new HoaDonChiTiet();
+                hoaDonChiTiet1.IdChiTietSP = idsp;
+                hoaDonChiTiet1.IdHoaDon = HoaDonController.idhd;
+                hoaDonChiTiet1.SoLuong++;
+                hoaDonChiTiet1.DonGia = _spct.GetAll().FirstOrDefault(c => c.Id == idsp).GiaBan;
+                _ct.Create(hoaDonChiTiet1);
                 return RedirectToAction("Index", "HoaDonChiTiet");
             }
-            
+
         }
     }
 }

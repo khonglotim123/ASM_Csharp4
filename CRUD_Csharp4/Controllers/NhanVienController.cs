@@ -29,6 +29,8 @@ namespace CRUD_Csharp4.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["cuahang"] = _cuahang.GetAll();
+            ViewData["chucvu"] = _cv.GetAll();
             return View();
         }
         [HttpPost]
@@ -45,6 +47,8 @@ namespace CRUD_Csharp4.Controllers
         public IActionResult Update(int id)
         {
             NhanVien sv = _ch.GetAll().FirstOrDefault(c => c.Id == id);
+            ViewData["cuahang"] = _cuahang.GetAll();
+            ViewData["chucvu"] = _cv.GetAll();
             return View(sv);
         }
         [HttpPost]
@@ -61,12 +65,16 @@ namespace CRUD_Csharp4.Controllers
         public IActionResult Chitiet(int id)
         {
             NhanVien sv = _ch.GetAll().FirstOrDefault(c => c.Id == id);
+            ViewData["cuahang"] = _cuahang.GetAll();
+            ViewData["chucvu"] = _cv.GetAll();
             return View(sv);
         }
         [HttpGet]
         public IActionResult Delete(int id)
         {
             NhanVien sv = _ch.GetAll().FirstOrDefault(c => c.Id == id);
+            ViewData["cuahang"] = _cuahang.GetAll();
+            ViewData["chucvu"] = _cv.GetAll();
             return View(sv);
         }
         [HttpPost]

@@ -4,32 +4,32 @@
     ViewData["Title"] = "Update";
 }
 
-<h1>Update</h1>
+<h1>Sửa nhà sản xuất</h1>
 
-<h4>NSX</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Update">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>           
             <div class="form-group">
-                <label asp-for="Ma" class="control-label"></label>
+                <label asp-for="Ma" class="control-label">Mã</label>
                 <input asp-for="Ma" class="form-control" />
                 <span asp-validation-for="Ma" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Ten" class="control-label"></label>
+                <label asp-for="Ten" class="control-label">Tên</label>
                 <input asp-for="Ten" class="form-control" />
                 <span asp-validation-for="Ten" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Lưu" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn btn-warning">Quay lại danh sách</a>
 </div>
 

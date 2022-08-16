@@ -4,95 +4,93 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Danh sách hóa đơn</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success">Thêm mới</a>
 </p>
 <table class="table">
     <thead>
-        <tr>           
+        <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Ma)
+                mã
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayTao)
+                Ngày tạo
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayThanhToan)
+                Ngày thanh toán
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayShip)
+                Ngày ship
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgayNhan)
+                Ngày nhận
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TinhTrang)
+                Tình trạng
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TenNguoiNhan)
+                Tên người nhận
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DiaChi)
+                Địa chỉ
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Sdt)
+                Số điện thoại
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdKH)
+                Khách hàng
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdNV)
+                Nhân viên
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ma)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayTao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayThanhToan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayShip)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayNhan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TinhTrang)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenNguoiNhan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiaChi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sdt)
-            </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.IdKH)
-        </td>*@
-            <td>
-                @Html.Raw(item.IdKH==1?"này":"Kia")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNV)
-            </td>
-            <td>
-                @Html.ActionLink("Thêm sản phẩm", "ThemSP", "HoaDon", new { item.Id }, new {@class="btn btn-primary"}) |
-                @Html.ActionLink("Chi tiết", "Index", "HoaDonChiTiet", new { item.Id }) |
-                @Html.ActionLink("Thanh toán", "Delete", new { item.Id })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ma)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayTao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayThanhToan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayShip)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgayNhan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TinhTrang)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenNguoiNhan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiaChi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sdt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdKH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNV)
+                </td>
+                <td>
+                    @Html.ActionLink("Thêm sản phẩm", "ThemSP", new { item.Id }, new { @class = "btn btn-primary" }) |
+                    @Html.ActionLink("Chi tiết", "Index","HoaDonChiTiet", new { item.Id }, new { @class = "btn btn-warning" }) |
+                    @Html.ActionLink("Thanh toán", "Index","HoaDonChiTiet", new { item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

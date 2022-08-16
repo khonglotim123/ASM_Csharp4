@@ -9,7 +9,7 @@ namespace ASM_Csharp4.Repositories
     {
         bool Create(HoaDonChiTiet chucVu);
         bool Update(HoaDonChiTiet chucVu);
-        bool Delete(int id);
+        bool Delete(HoaDonChiTiet hoaDonChiTiet);
         List<HoaDonChiTiet> GetAll();
     }
 }
